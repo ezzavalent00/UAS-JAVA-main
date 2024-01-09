@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e6ed7;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .login-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .login-link:hover {
+            background-color: #45a049;
+        }
+
+        .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          padding: 10px;
+          border: 3px solid green;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Welcome to the Hotel Management System</h1>
+
+<div th:if="${authenticated}">
+    <p>Welcome, <span th:text="${username}"></span>!</p>
+    <p th:if="${userRole}">Logged in as User</p>
+    <p th:if="${adminRole}">Logged in as Admin</p>
+    <p>Roles: <span th:text="${authority}"></span></p>
+
+    <div class="row">
+        <div class="col-lg-5 mx-auto mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Actions</h5>
+                    <div class="d-flex justify-content-between">
+                        <div th:if="${userRole}">
+                            <!-- User-specific buttons -->
+                            <a th:href="@{/visitors}" class="btn btn-primary btn-sm mb-3">View Visitor</a>
+                        </div>
+
+                        <div th:if="${adminRole}">
+                            <!-- Admin-specific buttons -->
+                            <a th:href="@{/visitors/new}" class="btn btn-primary btn-sm mb-3">Add Visitor</a>
+                            <a th:href="@{/receptionists/new}" class="btn btn-primary btn-sm mb-3">Add Receptionist</a>
+                            <a th:href="@{/visitors}" class="btn btn-primary btn-sm mb-3">View Visitor</a>
+                            <a th:href="@{/receptionists}" class="btn btn-primary btn-sm mb-3">View Receptionist</a>
+                        </div>
+
+                        <a th:href="@{/home/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
